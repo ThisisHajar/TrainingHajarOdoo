@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem id="library_root" name="Library Management System" web_icon="library_management,static/description/images/5566.png">
+        <menuitem id="library_first_level_menu" name="Author">
+            <menuitem id="library_author_menu_action" action="library_author_action"/>
+        </menuitem>
+        <menuitem id="library_second_level" name="Book">
+            <menuitem id="library_book_menu_action" action="library_book_action"/>
+            <menuitem id="library_reservations_menu_action" action="library_reservations_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>

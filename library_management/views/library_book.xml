@@ -1,0 +1,56 @@
+<odoo>
+    <record id="library_book_action" model="ir.actions.act_window">
+        <field name="name">Library Book</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="library_book_tree" model="ir.ui.view">
+        <field name="name">Library Book Tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Author">
+                <field name="name" string="Book Name"/>
+                <field name="isbn" string="ISBN No"/>
+                <field name="author_ids" widget="many2many_tags" string="Authors Name"/>
+                <field name="publication_date" string="Date of Publication"/>
+<!--                <field name="price" string="Book Price"/>-->
+            </tree>
+        </field>
+    </record>
+
+        <record id="library_book_form" model="ir.ui.view">
+        <field name="name">Library Book Form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+<!--                    <field name="" widget="statusbar" statusbar_visible="no of authers for each book"/>-->
+                </header>
+                <sheet>
+                    <h1 class="mb32">
+                         <field name="name" class="mb16"/>
+                     </h1>
+                    <group>
+                        <group>
+                            <field name="isbn" string="ISBN NO"/>
+                            <field name="publication_date" string="Date of Publication"/>
+                        </group>
+                        <group>
+                            <field name="price" string="Book Price"/>
+                            <field name="book_quantity" string="Book Quantity"/>
+                            <field name="total_books_price" string="Books Price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Author of the Book">
+                            <field name="author_ids" string="Authors"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

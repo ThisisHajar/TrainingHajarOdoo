@@ -1,0 +1,49 @@
+<odoo>
+    <record id="library_author_action" model="ir.actions.act_window">
+        <field name="name">Library Author</field>
+        <field name="res_model">library.author</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="library_author_tree" model="ir.ui.view">
+        <field name="name">Library Author Tree</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <tree string="Author">
+                <field name="name" string="Author Name"/>
+                <field name="birth_date" string="Birth Date"/>
+<!--                <field name="book_ids" string="Book Ids"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_author_form" model="ir.ui.view">
+        <field name="name">Library Author Form</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+<!--                    <field name="" widget="statusbar" statusbar_visible="no of books for each author"/>-->
+                </header>
+
+                <sheet>
+                    <h1 class="mb32">
+                         <field name="name" class="mb16"/>
+                     </h1>
+                    <group>
+<!--                        <field name="author_id" string="Auther ID"/>-->
+                        <field name="birth_date" string="Birth Date"/>
+                        <field name="total_books" string="Books of the author in the system"/>
+                    </group>
+                    <notebook>
+                        <page name="Books of the Author">
+                            <field name="book_ids" string="Books"/>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
