@@ -1,0 +1,85 @@
+<odoo>
+     <record id="estate_property_report_action" model="ir.actions.report">
+        <field name="name">Estate Property</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">estate.report_estate_property</field>
+        <field name="report_file">estate.report_estate_property</field>
+<!--         report name & report file is model name then . then template id -->
+        <field name="binding_model_id" ref="model_estate_property"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_estate_property">
+        <t t-foreach="docs" t-as="property">
+<!--            foreach loop docs is records selected or opened page
+                t-as property like variable we will use inside div-->
+            <t t-call="web.html_container">
+<!--                call html container-->
+                <t t-call="web.external_layout">
+<!--                    call layout-->
+                    <div class="page">
+                        <h2>
+<!--                            span used to call a field inside -->
+                            <span t-field="property.name"/>
+                        </h2>
+<!--                        to seperate lines we add divs for each line-->
+
+                            <div t-if="property.salesperson">
+<!--                                if there is sales person print if there is no salesperson don't leave it blank do not print whole line-->
+                                <strong>Salesman:</strong>
+                                <span t-field="property.salesperson"/>
+                            </div>
+
+                        <div t-if="property.expected_price" name="expected_price">
+                            <strong>Expected Price:</strong>
+                            <span t-field="property.expected_price"/>
+                        </div>
+                        <div t-if="property.state" name="status">
+                            <strong>Status:</strong>
+                            <span t-field="property.state"/>
+                        </div>
+
+                        <!--    now we have to add table and go into loop-->
+                        <t t-if="property.offer_id">
+                            <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Price</th>
+                                            <th>Partner</th>
+                                            <th>Validity (days)</th>
+                                            <th>Deadline</th>
+                                            <th>State</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="offers" t-value="property.mapped('offer_id')"/>
+                                        <tr t-foreach="offers" t-as="offer">
+                                            <td>
+                                                <span t-field="offer.price"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="offer.partner_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="offer.validity"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="offer.date_deadline"/>
+                                            </td>
+                                            <td >
+                                                <span t-field="offer.status"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                        </t>
+                        <t t-else="">
+                            <h5>No Offers Have been Made Yet!</h5>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
