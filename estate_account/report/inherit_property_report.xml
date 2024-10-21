@@ -1,0 +1,15 @@
+<odoo>
+    <template id="inherit_property_report" inherit_id="estate.report_estate_property">
+        <xpath expr="//div[class='page']/div[@name='status']" position="after">
+<!--            after,before,inside,replace most used in position
+                for example any code written here with AFTER it will be added in the original code AFTER closing notebook -->
+                <t t-if="property.state='sold'">
+                    <div>
+                        <span>
+                            Invoice Have Been Already Created
+                        </span>
+                    </div>
+                </t>
+        </xpath>
+    </template>
+</odoo>
